@@ -1,0 +1,233 @@
+openapi: 3.0.3
+info:
+  title: Task Manager API
+  description: REST API to manage projects and tasks
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080'
+tags:
+  - name: Tasks
+    description: The Tasks Endpoints
+  - name: Users
+    description: The Users Endpoints
+paths:
+  /api/users:
+    get:
+      summary: Get all users
+      operationId: getAllUsers
+      tags:
+        - Users
+      responses:
+        200:
+          description: Successfully retrieve all users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponse'
+    post:
+      summary: Create a new user
+      operationId: create
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserData'
+      responses:
+        200:
+          description: Successfully create a new user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+  /api/users/{id}:
+    get:
+      summary: Get the user with the specified id
+      operationId: getUserById
+      tags:
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successfully retrieve the user with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        404:
+          description: User not found
+  /api/tasks:
+    get:
+      summary: Get all tasks
+      operationId: getAllTasks
+      tags:
+        - Tasks
+      responses:
+        200:
+          description: Successfully retrive all tasks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskResponse'
+    post:
+      summary: Create a new Task
+      operationId: createTask
+      tags:
+        - Tasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskData'
+      responses:
+        200:
+          description: Successfully create a new task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+  /api/tasks/{id}:
+    get:
+      summary: Get task with the specified id
+      operationId: getTaskById
+      tags:
+        - Tasks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successfully retrive the task with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+    put:
+      summary: Modify the task with the sepcified id
+      operationId: updateTask
+      tags:
+        - Tasks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskData'
+      responses:
+        200:
+          description: Successfully modify the task with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+    delete:
+      summary: Delete a task by its id
+      operationId: deleteTask
+      tags:
+        - Tasks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: Successfully delete the task
+        404:
+          description: Task not found
+components:
+  schemas:
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 3fc0b85a-3790-4b94-8cbc-21e36869f09c
+        username:
+          type: string
+          example: Carlos Sanchez
+        email:
+          type: string
+          example: carlos@email.com
+        role:
+          type: string
+          example: ADMIN
+        avatar:
+          type: string
+          example: https://i.pravatar.cc/150?img=59
+        createdAt:
+          type: string
+          format: date-time
+          example: 2025-06-10 16:12:42.170421
+    UserData:
+      type: object
+      properties:
+        username:
+          type: string
+          example: Carlos Sanchez
+        email:
+          type: string
+          example: carlos@email.com
+        password:
+          type: string
+          example: 1234abcd
+        role:
+          type: string
+          example: ADMIN
+    TaskResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 3fc0b85a-3790-4b94-8cbc-21e36869f09c
+        title:
+          type: string
+          example: Title
+        description:
+          type: string
+          example: Description
+        completed:
+          type: boolean
+          example: true
+        dueDate:
+          type: string
+          format: date-time
+          example: 2024-03-21T15:00:00Z
+    TaskData:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Title
+        description:
+          type: string
+          example: Description
+        completed:
+          type: boolean
+          example: true
+        dueDate:
+          type: string
+          format: date-time
+          example: 2024-03-21T15:00:00Z
