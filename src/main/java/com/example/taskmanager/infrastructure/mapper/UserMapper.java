@@ -4,6 +4,7 @@ import com.example.taskmanager.domain.model.User;
 import com.example.taskmanager.infrastructure.entity.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 import org.openapitools.model.UserResponse;
 
 @Mapper(componentModel = "spring", uses = { DateMapper.class })
@@ -33,5 +34,6 @@ public interface UserMapper {
     @Mapping(target = "role")
     @Mapping(target = "avatar")
     @Mapping(target = "createdAt", qualifiedByName = "toOffsetDateTime")
+    @Named("toResponse")
     UserResponse toResponse(User user);
 }

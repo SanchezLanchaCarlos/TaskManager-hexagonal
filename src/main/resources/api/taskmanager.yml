@@ -6,11 +6,51 @@ info:
 servers:
   - url: 'http://localhost:8080'
 tags:
+  - name: Auth
+    description: The Authentication Endpoints
   - name: Tasks
     description: The Tasks Endpoints
   - name: Users
     description: The Users Endpoints
 paths:
+  /api/auth/register:
+    post:
+      summary: Register a new user
+      operationId: register
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterData'
+      responses:
+        200:
+          description: Successfully register a new user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+  /api/auth/login:
+    post:
+      summary: Login with a registered user
+      operationId: login
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginData'
+      responses:
+        200:
+          description: Successfully login with the specified user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
   /api/users:
     get:
       summary: Get all users
@@ -26,24 +66,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/UserResponse'
-    post:
-      summary: Create a new user
-      operationId: create
-      tags:
-        - Users
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserData'
-      responses:
-        200:
-          description: Successfully create a new user
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserResponse'
   /api/users/{id}:
     get:
       summary: Get the user with the specified id
@@ -159,6 +181,38 @@ paths:
           description: Task not found
 components:
   schemas:
+    RegisterData:
+      type: object
+      properties:
+        email:
+          type: string
+          example: carlos@email.com
+        password:
+          type: string
+          example: 1234abcd
+        username:
+          type: string
+          example: Carlos Sanchez
+        role:
+          type: string
+          example: ADMIN
+    LoginData:
+      type: object
+      properties:
+        email:
+          type: string
+          example: carlos@email.com
+        password:
+          type: string
+          example: 1234abcd
+    AuthResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiJ9
+        user:
+          $ref: '#/components/schemas/UserResponse'
     UserResponse:
       type: object
       properties:
