@@ -1,7 +1,7 @@
 package com.example.taskmanager.infrastructure.security;
 
 import com.example.taskmanager.domain.model.User;
-import com.example.taskmanager.domain.ports.out.JwtService;
+import com.example.taskmanager.domain.JwtService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;

@@ -1,6 +1,6 @@
 package com.example.taskmanager.infrastructure.security;
 
-import com.example.taskmanager.domain.ports.out.JwtService;
+import com.example.taskmanager.domain.JwtService;
 import com.example.taskmanager.infrastructure.mapper.UserMapper;
 import com.example.taskmanager.infrastructure.repository.JpaUserRepository;
 import jakarta.servlet.FilterChain;

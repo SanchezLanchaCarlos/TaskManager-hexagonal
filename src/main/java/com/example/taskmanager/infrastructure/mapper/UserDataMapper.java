@@ -1,7 +1,7 @@
 package com.example.taskmanager.infrastructure.mapper;
 
 import com.example.taskmanager.domain.model.Role;
-import com.example.taskmanager.domain.ports.in.users.CreateUserQuery;
+import com.example.taskmanager.domain.users.CreateUserQuery;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

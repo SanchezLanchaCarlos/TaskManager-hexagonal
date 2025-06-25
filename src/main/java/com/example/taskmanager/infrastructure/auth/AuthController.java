@@ -1,8 +1,8 @@
 package com.example.taskmanager.infrastructure.auth;
 
-import com.example.taskmanager.application.service.AuthenticationService;
-import com.example.taskmanager.domain.ports.in.auth.AuthRequestQuery;
-import com.example.taskmanager.domain.ports.in.auth.RegisterRequestQuery;
+import com.example.taskmanager.domain.auth.AuthRequestQuery;
+import com.example.taskmanager.domain.auth.AuthenticationUseCase;
+import com.example.taskmanager.domain.auth.RegisterRequestQuery;
 import com.example.taskmanager.infrastructure.mapper.AuthMapper;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.api.AuthApi;
@@ -16,18 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController implements AuthApi {
 
-    private final AuthenticationService authenticationService;
+    private final AuthenticationUseCase authenticationUseCase;
     private final AuthMapper authMapper;
 
     @Override
     public ResponseEntity<AuthResponse> register(RegisterData registerData) {
         RegisterRequestQuery query = authMapper.toRegisterRequestQuery(registerData);
-        return ResponseEntity.ok(authMapper.toAuthResponse(authenticationService.register(query)));
+        return ResponseEntity.ok(authMapper.toAuthResponse(authenticationUseCase.register(query)));
     }
 
     @Override
     public ResponseEntity<AuthResponse> login(LoginData loginData) {
         AuthRequestQuery query = authMapper.toAuthRequestQuery(loginData);
-        return ResponseEntity.ok(authMapper.toAuthResponse(authenticationService.authenticate(query)));
+        return ResponseEntity.ok(authMapper.toAuthResponse(authenticationUseCase.authenticate(query)));
     }
 }

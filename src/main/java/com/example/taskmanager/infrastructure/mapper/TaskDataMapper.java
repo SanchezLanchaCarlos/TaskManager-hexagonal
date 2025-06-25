@@ -1,6 +1,6 @@
 package com.example.taskmanager.infrastructure.mapper;
 
-import com.example.taskmanager.domain.ports.in.tasks.CreateTaskQuery;
+import com.example.taskmanager.domain.tasks.CreateTaskQuery;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.openapitools.model.TaskData;

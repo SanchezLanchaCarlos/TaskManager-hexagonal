@@ -1,8 +1,8 @@
 package com.example.taskmanager.infrastructure.mapper;
 
-import com.example.taskmanager.domain.ports.in.auth.AuthRequestQuery;
-import com.example.taskmanager.domain.ports.in.auth.AuthResponseQuery;
-import com.example.taskmanager.domain.ports.in.auth.RegisterRequestQuery;
+import com.example.taskmanager.domain.auth.AuthRequestQuery;
+import com.example.taskmanager.domain.auth.AuthResponseQuery;
+import com.example.taskmanager.domain.auth.RegisterRequestQuery;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.openapitools.model.AuthResponse;
