@@ -1,6 +1,8 @@
 package com.example.taskmanager.infrastructure.controller;
 
+import com.example.taskmanager.domain.users.CreateUserUseCase;
 import com.example.taskmanager.domain.users.RetrieveUserUseCase;
+import com.example.taskmanager.infrastructure.mapper.UserDataMapper;
 import com.example.taskmanager.infrastructure.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.api.UsersApi;
@@ -14,10 +16,12 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-public class RetrieveUserController implements UsersApi {
+public class UserController implements UsersApi {
 
+    private final CreateUserUseCase createUserUseCase;
     private final RetrieveUserUseCase retrieveUserUseCase;
     private final UserMapper userMapper;
+    private final UserDataMapper userDataMapper;
 
     @Override
     public ResponseEntity<List<UserResponse>> getAllUsers() {
